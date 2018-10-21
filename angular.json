@@ -9,7 +9,7 @@
       "projectType": "application",
       "prefix": "app",
       "schematics": {
-        "@schematics/angular:component": {
+        "@ngrx/schematics:component": {
           "styleext": "scss"
         }
       },
@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "dnd-kit"
+  "defaultProject": "dnd-kit",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
