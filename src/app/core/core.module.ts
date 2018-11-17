@@ -14,7 +14,6 @@ import { CarouselDirective } from './directives/carousel.directive';
     ],
     declarations: [
         DndCarouselComponent,
-        DndDropdownComponent,
 
         RangeDirective,
         LetDirective,
@@ -25,7 +24,6 @@ import { CarouselDirective } from './directives/carousel.directive';
         MatIconModule,
 
         DndCarouselComponent,
-        DndDropdownComponent,
 
         RangeDirective,
         LetDirective,
