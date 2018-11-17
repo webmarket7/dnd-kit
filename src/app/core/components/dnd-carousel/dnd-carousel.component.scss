@@ -1,0 +1,46 @@
+:host {
+    display: block;
+}
+
+.dnd-carousel {
+
+    &__wrap {
+        position: relative;
+    }
+
+    &__description {
+        box-sizing: border-box;
+        padding: 10px;
+        height: 80px;
+
+        p {
+            margin: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: 100%;
+        }
+    }
+}
+
+main {
+    margin-bottom: 16px;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    position: absolute;
+    top: calc(50% - 20px);
+}
+
+.left-button {
+    left: 0;
+}
+
+.right-button {
+    right: 0;
+}

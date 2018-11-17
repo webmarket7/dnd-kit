@@ -1,0 +1,9 @@
+.app__layout {
+    padding: 50px;
+}
+
+.app__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 50px;
+}
