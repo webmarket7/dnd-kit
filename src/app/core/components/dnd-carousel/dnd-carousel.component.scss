@@ -4,7 +4,12 @@
 
 .dnd-carousel {
 
+    &__card {
+        display: inline-block;
+    }
+
     &__wrap {
+        display: inline-block;
         position: relative;
     }
 
@@ -27,7 +32,6 @@ main {
 }
 
 img {
-    display: block;
     max-width: 100%;
     height: auto;
 }

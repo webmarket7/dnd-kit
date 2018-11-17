@@ -16,9 +16,9 @@ interface RangeContext {
 export class RangeDirective {
 
     @Input()
-    set appRange(value: number[] | number) {
+    set appRangeOf(value: number[] | number) {
         this.viewRef.clear();
-        const arr = range(value);
+        const arr = Array.isArray(value) ? range(value[0], value[1]) : range(value);
 
         arr.forEach((itemNumber: number, index: number) => {
             const even = index % 2 === 0;

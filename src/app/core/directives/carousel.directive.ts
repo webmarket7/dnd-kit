@@ -16,23 +16,16 @@ export class CarouselDirective implements OnInit, OnDestroy {
     context: CarouselContext | null = null;
     index = 0;
     timerId: number | null = null;
-    private _autoplayDelay: number;
 
     @Input('appCarouselFrom') images: string[];
+
+    /* Allow to override default autoplay delay */
+    @Input('appCarouselWithdelay') withDelay: number;
 
     /* Allow to toggle carousel autoplay */
     @Input('appCarouselAutoplay')
     set autoplay(autoplay: 'on' | 'off') {
         autoplay === 'on' ? this.setAutoplayTimer() : this.clearAutoplayTimer();
-    }
-
-    /* Allow to override default autoplay delay */
-    @Input('appCarouselWithDelay')
-    set autoplayDelay(autoplayDelay: number) {
-        this._autoplayDelay = autoplayDelay;
-    }
-    get autoplayDelay() {
-        return this._autoplayDelay || 1000;
     }
 
     constructor(private readonly viewRef: ViewContainerRef,
@@ -72,10 +65,10 @@ export class CarouselDirective implements OnInit, OnDestroy {
     }
 
     private clearAutoplayTimer(): void {
-        clearInterval(this.timerId);
+        window.clearInterval(this.timerId);
     }
 
     private setAutoplayTimer(): void {
-        this.timerId = setInterval(() => this.next(), 1000);
+        this.timerId = window.setInterval(() => this.next(), this.withDelay || 1000);
     }
 }
