@@ -1,0 +1,21 @@
+.app__background
+    .center-popup
+        .app__logo-wrapper
+            .app__name D&D Kit
+            img.app__big-logo(src='../../../../../assets/img/logo.svg' alt='Logo')
+
+        form.authorization-form([formGroup]='form' '(submit)'='onFormSubmit(form)' novalidate='' autocomplete='off')
+
+            .dynamic-form-wrap__sign-in
+                dynamic-form([form]='form' '[model]'='formModel')
+
+            .forgot-password.align-right
+                .link Forgot password?
+
+            .form-controls
+                button.button.warning-button(type='submit')
+                    span.button-text Sign In
+
+            .alternative-option
+                span.alternative-option__question New here?
+                span.link('[routerLink]'="['/sign-up']") Sign Up

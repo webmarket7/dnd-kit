@@ -1,0 +1,48 @@
+@import 'functions';
+
+//Fonts
+$font: 'Roboto', sans-serif;
+$font-1: 'Quicksand', sans-serif;
+$font-2: 'Luckiest Guy', cursive;
+$font-size: 0;
+$input-size: 16px;
+$line-height: 1;
+
+//Colors
+$color: #31D996;
+$color-1: #BF0000;
+$color-2: #050505;
+$color-3: #FFFFFF;
+$color-4: #979797;
+$color-5: rgba(124, 135, 165, 0.5982);
+$color-6: #FF8D0A;
+$color-7: #E5E5E5;
+$color-8: #F2F2F2;
+$color-9: #e9fbf4;
+$color-10: #ffe6e6;
+
+$shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+$shadow-active: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+%align-middle {
+  &:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+  }
+}
+
+%middle {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+%align-bottom {
+    &:after {
+        content: '';
+        display: inline-block;
+        vertical-align: bottom;
+        height: 100%;
+    }
+}

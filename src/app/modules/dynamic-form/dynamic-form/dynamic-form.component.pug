@@ -1,0 +1,27 @@
+.dynamic-form__form-wrapper('[formGroup]'='form')
+
+    fieldset.dynamic-form__fieldset
+
+        .input-wrapper('*ngFor'='let control of model')
+
+            label.input-label(
+                '[ngClass]'='{required: control?.validation?.required}'
+                '[attr.for]'='control?.id'
+            ) {{ control?.label }}
+
+            ng-container('[ngSwitch]'='control?.component')
+                ng-container('*ngSwitchCase'="'text-input'")
+
+                    text-input(
+                        '[formControlName]'='control?.key'
+                        '[icon]'='control?.icon'
+                        '[type]'='control?.type'
+                        '[id]'='control?.id'
+                        '[placeholder]'='control?.placeholder'
+                        '[maxLength]'='control?.validation?.maxLength || 0'
+                        '[minLength]'='control?.validation?.minLength || 0'
+                        '[strengthMeter]'='control?.strengthMeter'
+                        '[email]'='control?.type === "email"'
+                    )
+
+            validation-message('[controlKey]'='control?.key')

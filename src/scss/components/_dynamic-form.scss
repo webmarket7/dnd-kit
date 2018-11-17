@@ -1,0 +1,75 @@
+.dynamic-form-wrap {
+
+
+
+    &__sign-up {
+        margin-bottom: 30px;
+    }
+}
+
+.forgot-password {
+    margin-bottom: 35px;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.link {
+    display: inline-block;
+    font-family: $font;
+    color: $color;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 700;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+.button {
+    height: 38px;
+    width: 100%;
+    box-shadow: $shadow;
+
+    .button-text {
+        font-family: $font;
+        color: $color-3;
+        font-size: 16px;
+        line-height: 18px;
+        text-align: center;
+    }
+
+    &.success-button {
+        background-color: $color;
+    }
+
+    &.warning-button {
+        background-color: $color-6;
+    }
+
+    &:active {
+        box-shadow: $shadow-active;
+    }
+}
+
+.alternative-option {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+
+    &__question {
+        color: $color-2;
+        font-family: $font-1;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 600;
+        margin-right: 5px;
+    }
+}

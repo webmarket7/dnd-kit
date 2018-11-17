@@ -1,0 +1,4 @@
+.invalid-message__wrap('[invalidMessage]'='controlKey' '[groupName]'='groupName')
+    p.invalid-message(*invalidType="'required'") This field is required
+    p.invalid-message(*invalidType="'minlength'; let expectedMinLength = minLength") Min length is {{ expectedMinLength }} symbols
+    p.invalid-message(*invalidType="'email'") Entered email is not valid
