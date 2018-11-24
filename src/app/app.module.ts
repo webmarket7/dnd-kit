@@ -13,8 +13,6 @@ import { reducers, metaReducers } from './reducers';
 import { environment } from '../environments/environment';
 import { firebaseConfig } from '../environments/firebase.config';
 import { CoreModule } from './core/core.module';
-import { ActionMenuDirective } from './core/directives/action-menu.directive';
-import { RenderListDirective } from './core/directives/render-list.directive';
 
 @NgModule({
     imports: [
@@ -29,9 +27,7 @@ import { RenderListDirective } from './core/directives/render-list.directive';
         CoreModule
     ],
     declarations: [
-        AppComponent,
-        ActionMenuDirective,
-        RenderListDirective
+        AppComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
