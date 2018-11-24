@@ -19,9 +19,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -37,6 +34,9 @@ import { AppComponent } from './app.component';
         EffectsModule.forRoot([AppEffects]),
         CoreModule,
         AuthModule
+    ],
+    declarations: [
+        AppComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
@@ -17,7 +16,6 @@ import { InvalidTypeDirective } from './directives/invalid-type.directive';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        PasswordStrengthMeterModule,
         AngularFontAwesomeModule
     ],
     declarations: [

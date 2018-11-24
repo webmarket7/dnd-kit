@@ -1,0 +1,14 @@
+div('*appCarousel'='let image from images; let ctrl = controller')
+    main.dnd-carousel__card.mat-elevation-z1
+        .dnd-carousel__wrap
+            img('[src]'='image.url')
+
+            button.left-button('mat-icon-button'='' '(click)'='ctrl.prev()')
+                mat-icon navigate_before
+
+            button.right-button('mat-icon-button'='' '(click)'='ctrl.next()')
+                mat-icon navigate_next
+
+        .dnd-carousel__description
+            p {{ image.description }}
+

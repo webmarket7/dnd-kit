@@ -5,7 +5,7 @@
         fa('[name]'='icon')
 
     input.text-input(
-        '[ngClass]'='{"with-icon": !!icon, "with-strength-meter": strengthMeter}'
+        '[ngClass]'='{"with-icon": !!icon}'
         '[type]'='type === "password" ? passwordType : (type || "text")'
         '[id]'='id'
         '[placeholder]'='placeholder'
@@ -18,8 +18,3 @@
     ng-container('*ngIf'='id === "password"')
         .text-input__password-visibility-toggle('(click)'='onTogglePasswordVisibility($event)')
             fa('[name]'='passwordType === "password" ? "eye" : "eye-slash"')
-        password-strength-meter(
-            '*ngIf'='strengthMeter'
-            '[password]'='value'
-            '[minPasswordLength]'='minLength'
-        )

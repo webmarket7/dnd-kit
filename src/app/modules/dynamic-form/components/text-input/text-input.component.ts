@@ -25,10 +25,9 @@ export class TextInputComponent implements ControlValueAccessor {
 
     @Input() type?: string;
     @Input() icon?: string;
-    @Input() strengthMeter?: boolean;
 
     constructor(
-        private injector: Injector
+        public injector: Injector
     ) {}
 
     private propagateChange = (value: string) => {};
