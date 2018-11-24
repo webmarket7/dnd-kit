@@ -3,8 +3,11 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { from } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { AuthActionTypes, CheckAuthState, SignIn, SignInRequested, SignUp, SignUpRequested } from './auth.actions';
+import { tap, map, switchMap } from 'rxjs/operators';
+import {
+    AuthActionTypes, CheckAuthState, LogOut, LogOutRequested, SignIn, SignInRequested, SignUp,
+    SignUpRequested
+} from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -73,7 +76,7 @@ export class AuthEffects {
 
                     return new SignIn({user: authState});
                 } else {
-                    return {type: AuthActionTypes.LogOut};
+                    return new LogOut();
                 }
             })
         );
@@ -82,12 +85,20 @@ export class AuthEffects {
     @Effect()
     logOutRequested$ = this.actions$
         .pipe(
-            ofType<SignInRequested>(AuthActionTypes.LogOutRequested),
+            ofType<LogOutRequested>(AuthActionTypes.LogOutRequested),
             map(() => {
-                this.router.navigate(['sign-in']);
                 this.afAuth.auth.signOut();
 
-                return {type: AuthActionTypes.LogOut};
+                return new LogOut();
+            })
+        );
+
+    @Effect({dispatch: false})
+    logOut$ = this.actions$
+        .pipe(
+            ofType<LogOut>(AuthActionTypes.LogOut),
+            tap(() => {
+                this.router.navigate(['sign-in']);
             })
         );
 }
