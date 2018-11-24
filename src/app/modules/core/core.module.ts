@@ -6,8 +6,12 @@ import { RangeDirective } from './directives/range.directive';
 import { LetDirective } from './directives/let.directive';
 import { CarouselDirective } from './directives/carousel.directive';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { DropdownMenuDirective } from './directives/dropdown-menu.directive';
+import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
+
 
 @NgModule({
     imports: [
@@ -15,15 +19,18 @@ import { AppHeaderComponent } from './components/app-header/app-header.component
         MatButtonModule,
         MatIconModule,
         OverlayModule,
+        PortalModule,
         AngularFontAwesomeModule
     ],
     declarations: [
         DndCarouselComponent,
         AppHeaderComponent,
+        DropdownMenuComponent,
 
         RangeDirective,
         LetDirective,
-        CarouselDirective
+        CarouselDirective,
+        DropdownMenuDirective
     ],
     exports: [
         MatButtonModule,
@@ -33,10 +40,12 @@ import { AppHeaderComponent } from './components/app-header/app-header.component
 
         AppHeaderComponent,
         DndCarouselComponent,
+        DropdownMenuComponent,
 
         RangeDirective,
         LetDirective,
-        CarouselDirective
+        CarouselDirective,
+        DropdownMenuDirective
     ]
 })
 export class CoreModule {
