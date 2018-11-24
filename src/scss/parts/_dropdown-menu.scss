@@ -1,0 +1,81 @@
+$arrow-offset: 7px;
+
+.dropdown-menu {
+    background-color: $color-3;
+    box-shadow: $shadow;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 10px 0;
+    position: relative;
+
+    &__arrow {
+        width: 20px;
+        height: 10px;
+        position: absolute;
+        transform: translateX(-50%);
+        overflow: hidden;
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: $color-3;
+            transform: translateX(-50%) translateY(-50%) rotate(45deg);
+            left: 50%;
+            box-shadow: $shadow;
+        }
+
+        &.top {
+            bottom: 100%;
+
+            &::after {
+                top: 10px;
+            }
+        }
+
+        &.bottom {
+            top: 100%;
+            transform: translateX(-50%);
+
+            &::after {
+                top: 0;
+            }
+        }
+
+        &.left {
+            left: $arrow-offset;
+        }
+
+        &.right {
+            right: $arrow-offset;
+        }
+    }
+
+    &__list {
+
+        &-item {
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+            color: $color-2;
+            border-bottom: 1px solid $color-2;
+            cursor: pointer;
+
+            &:first-child {
+                padding-top: 0;
+            }
+
+            &:last-child {
+                padding-botom: 0;
+                border-bottom: none;
+            }
+
+            span {
+                font-size: 12px;
+                text-transform: uppercase;
+                margin-left: 5px;
+            }
+        }
+    }
+}

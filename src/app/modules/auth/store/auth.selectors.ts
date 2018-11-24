@@ -8,3 +8,11 @@ export const isLoggedIn = createSelector(
         return auth.authenticated;
     }
 );
+
+export const selectUser = createSelector(
+    selectAuthState,
+    auth => {
+        return auth.user;
+    }
+);
+

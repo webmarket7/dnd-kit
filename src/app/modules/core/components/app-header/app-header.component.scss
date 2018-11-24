@@ -1,0 +1,24 @@
+@import '../../../../../scss/base/reset';
+
+.app__header {
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: $shadow;
+    height: 60px;
+    padding: 10px 20px;
+    border-bottom: 1px solid $color-1;
+}
+
+.user-avatar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: $color-1;
+    font-size: 32px;
+
+    span {
+        color: $color-2;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+}

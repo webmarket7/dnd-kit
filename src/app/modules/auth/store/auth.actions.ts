@@ -14,6 +14,7 @@ export class SignUpRequested implements Action {
     readonly type = AuthActionTypes.SignUpRequested;
 
     constructor(public payload: {
+        displayName: string,
         username: string,
         password: string
     }) {}
@@ -34,6 +35,10 @@ export class SignInRequested implements Action {
 
 export class SignIn implements Action {
     readonly type = AuthActionTypes.SignIn;
+
+    constructor(public payload: {
+        user: any
+    }) {}
 }
 
 export class LogOutRequested implements Action {

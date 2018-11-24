@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { from } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { AuthActionTypes, SignInRequested, SignUpRequested } from './auth.actions';
+import { AuthActionTypes, CheckAuthState, SignIn, SignInRequested, SignUp, SignUpRequested } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -16,52 +16,62 @@ export class AuthEffects {
     ) {}
 
     @Effect()
-    authSignUp = this.actions$.pipe(
+    signUpRequested$ = this.actions$.pipe(
         ofType<SignUpRequested>(AuthActionTypes.SignUpRequested),
         map((action: SignUpRequested) => {
-            console.log('Action payload', action.payload);
 
             return action.payload;
         }),
-        switchMap((authData: {username: string, password: string}) => {
-            return from(this.afAuth.auth.createUserWithEmailAndPassword(authData.username, authData.password));
+        switchMap((authData: {displayName: string, username: string, password: string}) => {
+
+            return from(this.afAuth.auth.createUserWithEmailAndPassword(authData.username, authData.password)).pipe(
+                switchMap((response) => {
+
+                    return from(response.user.updateProfile({
+                        displayName: authData.displayName,
+                        photoURL: null
+                    }));
+                })
+            );
         }),
         map((response: any) => {
-            console.log('Response', response);
-
             this.router.navigate(['/']);
 
-            return {type: AuthActionTypes.SignUp};
+            return new SignUp();
         })
     );
 
     @Effect()
-    authSignIn = this.actions$
+    signInRequested$ = this.actions$
         .pipe(
             ofType<SignInRequested>(AuthActionTypes.SignInRequested),
             map((action: SignInRequested) =>  {
+
                 return action.payload;
             }),
             switchMap((authData: {username: string, password: string}) => {
+
                 return from(this.afAuth.auth.signInWithEmailAndPassword(authData.username, authData.password));
             }),
-            map(() => {
+            map((response: any) => {
                 this.router.navigate(['/']);
 
-                return {type: AuthActionTypes.SignIn};
+                return new SignIn({user: response});
             })
         );
 
     @Effect()
-    authStateCheck = this.actions$
+    checkAuthState$ = this.actions$
         .pipe(
-            ofType<SignInRequested>(AuthActionTypes.CheckAuthState),
+            ofType<CheckAuthState>(AuthActionTypes.CheckAuthState),
             switchMap(() => {
+
                 return this.afAuth.authState;
             }),
             map((authState) => {
                 if (authState) {
-                    return {type: AuthActionTypes.SignIn};
+
+                    return new SignIn({user: authState});
                 } else {
                     return {type: AuthActionTypes.LogOut};
                 }
@@ -70,11 +80,11 @@ export class AuthEffects {
 
 
     @Effect()
-    authLogout = this.actions$
+    logOutRequested$ = this.actions$
         .pipe(
             ofType<SignInRequested>(AuthActionTypes.LogOutRequested),
             map(() => {
-                this.router.navigate(['auth/sign-in']);
+                this.router.navigate(['sign-in']);
                 this.afAuth.auth.signOut();
 
                 return {type: AuthActionTypes.LogOut};

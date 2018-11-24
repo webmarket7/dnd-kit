@@ -17,7 +17,7 @@ export class SignUpComponent {
     constructor(private store: Store<AppState>) {
         this.form = new FormGroup({}, {updateOn: 'blur'});
         this.formModel = [
-            /*{
+            {
                 component: 'text-input',
                 key: 'username',
                 label: 'Username',
@@ -29,7 +29,7 @@ export class SignUpComponent {
                     minLength: 2,
                     maxlength: 256
                 }
-            },*/
+            },
             {
                 component: 'text-input',
                 key: 'email',
@@ -61,11 +61,14 @@ export class SignUpComponent {
     }
 
     onFormSubmit(form: FormGroup) {
-        const formData = form.value,
-              email = formData.email,
-              password = formData.password;
+        const
+            formData = form.value,
+            displayName = formData.username,
+            email = formData.email,
+            password = formData.password;
 
         this.store.dispatch(new SignUpRequested({
+            displayName,
             username: email,
             password
         }));

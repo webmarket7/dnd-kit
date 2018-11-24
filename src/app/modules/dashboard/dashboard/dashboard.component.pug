@@ -1,0 +1,30 @@
+.dashboard
+    .dashboard__content
+        ng-container('*appRange'='let number of 10')
+            .dashboard__content-row
+                p {{ number }}
+                button(
+                    mat-icon-button
+                    cdkOverlayOrigin
+                    '#trigger'='cdkOverlayOrigin'
+                    '(click)'='isOpen = !isOpen'
+                )
+                    mat-icon more_horiz
+
+                ng-template(
+                    cdkConnectedOverlay
+                    '[cdkConnectedOverlayOrigin]'='trigger'
+                    '[cdkConnectedOverlayOpen]'='isOpen'
+                )
+                    .dropdown-menu
+                        .dropdown-menu__arrow.top.right
+                        ul.dropdown-menu__list
+                            li.dropdown-menu__list-item
+                                mat-icon edit
+                                span View Profile
+                            li.dropdown-menu__list-item
+                                mat-icon settings
+                                span Account Settings
+                            li.dropdown-menu__list-item
+                                mat-icon exit_to_app
+                                span Sign Out
