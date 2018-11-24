@@ -51,7 +51,6 @@ export class SignUpComponent {
                 icon: 'lock',
                 id: 'password',
                 placeholder: 'min. 6 symbols',
-                strengthMeter: true,
                 validation: {
                     required: true,
                     minLength: 6,
