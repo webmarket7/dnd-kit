@@ -17,4 +17,8 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
     }
 
+    onViewProfile($event, number) {
+        console.log('Clicked on', $event, number);
+    }
+
 }

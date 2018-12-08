@@ -11,6 +11,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { DropdownMenuDirective } from './directives/dropdown-menu.directive';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
+import { DndMenuItemComponent } from './components/dnd-menu-item/dnd-menu-item.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.
         RangeDirective,
         LetDirective,
         CarouselDirective,
-        DropdownMenuDirective
+        DropdownMenuDirective,
+        DndMenuItemComponent
     ],
     exports: [
         MatButtonModule,
@@ -41,11 +43,12 @@ import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.
         AppHeaderComponent,
         DndCarouselComponent,
         DropdownMenuComponent,
+        DndMenuItemComponent,
 
         RangeDirective,
         LetDirective,
         CarouselDirective,
-        DropdownMenuDirective
+        DropdownMenuDirective,
     ]
 })
 export class CoreModule {

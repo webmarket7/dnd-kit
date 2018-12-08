@@ -31,8 +31,6 @@ export class DropdownMenuDirective implements AfterViewInit, OnDestroy {
         this._menu = menu;
         this._menuCloseSubscription.unsubscribe();
 
-        console.log('Menu', menu);
-
         if (menu) {
             this._menuCloseSubscription = menu.closed
                 .asObservable()
@@ -62,7 +60,6 @@ export class DropdownMenuDirective implements AfterViewInit, OnDestroy {
     private _getPortal(): TemplatePortal {
         if (!this._portal || this._portal.templateRef !== this.menu.templateRef) {
             this._portal = new TemplatePortal(this.menu.templateRef, this._viewContainerRef);
-            console.log(this._portal);
         }
 
         return this._portal;
