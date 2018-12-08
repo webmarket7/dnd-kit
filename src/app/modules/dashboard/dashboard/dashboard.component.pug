@@ -1,20 +1,18 @@
 .dashboard
     .dashboard__content
-        ng-container('*appRange'='let number of 10')
+        ng-container('*appRange'='let number of 20')
             .dashboard__content-row
-                ng-template('#menu'='')
-                    .dropdown-menu
-                        .dropdown-menu__arrow.top.right
-                        ul.dropdown-menu__list
-                            li.dropdown-menu__list-item
-                                mat-icon edit
-                                span View Profile
-                            li.dropdown-menu__list-item
-                                mat-icon settings
-                                span Account Settings
-                            li.dropdown-menu__list-item
-                                mat-icon exit_to_app
-                                span Sign Out
+                app-dropdown-menu('#menu'='dropdownMenuComponent')
+                    ul.dropdown-menu__list
+                        li.dropdown-menu__list-item
+                            mat-icon edit
+                            span View Profile
+                        li.dropdown-menu__list-item
+                            mat-icon settings
+                            span Account Settings
+                        li.dropdown-menu__list-item
+                            mat-icon exit_to_app
+                            span Sign Out
 
                 button(mat-icon-button '[appDropdownMenu]'='menu')
                     mat-icon more_horiz
