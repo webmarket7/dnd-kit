@@ -1,5 +1,5 @@
 import {
-    Component, HostBinding, OnInit,
+    Component, EventEmitter, HostBinding, HostListener, OnInit, Output,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -11,7 +11,14 @@ import {
 })
 export class DndMenuItemComponent implements OnInit {
 
+    @Output() clicked = new EventEmitter<MouseEvent>();
+
     @HostBinding('class') defaultClass = 'dropdown-menu__list-item';
+    @HostListener('click', ['$event'])
+    onClick($event) {
+        console.log('Clicked in item', $event);
+        this.clicked.emit($event);
+    }
 
     constructor() {
     }

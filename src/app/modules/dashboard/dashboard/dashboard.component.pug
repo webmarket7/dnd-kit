@@ -1,17 +1,17 @@
+app-dropdown-menu('#menu'='dropdownMenuComponent')
+    dnd-menu-item('(click)'='onViewProfile($event, number)')
+        mat-icon edit
+        span View Profile
+    dnd-menu-item
+        mat-icon settings
+        span Account Settings
+    dnd-menu-item
+        mat-icon exit_to_app
+        span Sign Out
+
 .dashboard
     .dashboard__content
         ng-container('*appRange'='let number of 10')
             .dashboard__content-row
-                app-dropdown-menu('#menu'='dropdownMenuComponent')
-                    dnd-menu-item('(click)'='onViewProfile($event, number)')
-                        mat-icon edit
-                        span View Profile
-                    dnd-menu-item
-                        mat-icon settings
-                        span Account Settings
-                    dnd-menu-item
-                        mat-icon exit_to_app
-                        span Sign Out
-
                 button(mat-icon-button '[appDropdownMenu]'='menu')
                     mat-icon more_horiz

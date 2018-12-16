@@ -1,15 +1,20 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, ViewContainerRef } from '@angular/core';
-import { ComponentPortal, Portal, PortalOutlet, TemplatePortal } from '@angular/cdk/portal';
+import {
+    AfterViewInit, Directive, ElementRef, HostListener, Input, OnDestroy, Optional,
+    ViewContainerRef, AfterContentInit
+} from '@angular/core';
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
     ConnectedPosition, FlexibleConnectedPositionStrategy, Overlay, OverlayConfig,
     OverlayRef, PositionStrategy
 } from '@angular/cdk/overlay';
-import { merge, Observable, Subscription } from 'rxjs/index';
+import { merge, Observable, of, Subscription } from 'rxjs/index';
+import { DropdownMenuComponent } from '../components/dropdown-menu/dropdown-menu.component';
+
 
 @Directive({
     selector: '[appDropdownMenu]'
 })
-export class DropdownMenuDirective implements AfterViewInit, OnDestroy {
+export class DropdownMenuDirective implements AfterViewInit, OnDestroy, AfterContentInit {
 
     private _portal: TemplatePortal;
     private _overlayRef: OverlayRef | null = null;
@@ -22,7 +27,6 @@ export class DropdownMenuDirective implements AfterViewInit, OnDestroy {
     get menu() {
         return this._menu;
     }
-
     set menu(menu: any) {
         if (menu === this._menu) {
             return;
@@ -35,6 +39,8 @@ export class DropdownMenuDirective implements AfterViewInit, OnDestroy {
             this._menuCloseSubscription = menu.closed
                 .asObservable()
                 .subscribe(reason => {
+                    console.log('Reason', reason);
+
                     this._destroyMenu();
                 });
         }
@@ -47,10 +53,15 @@ export class DropdownMenuDirective implements AfterViewInit, OnDestroy {
 
     constructor(private elRef: ElementRef,
                 private _viewContainerRef: ViewContainerRef,
-                private _overlay: Overlay) {
+                private _overlay: Overlay,
+                @Optional() private _parentMenu: DropdownMenuComponent) {
     }
 
     ngAfterViewInit(): void {
+    }
+
+    ngAfterContentInit(): void {
+        this._checkMenu();
     }
 
     ngOnDestroy(): void {
@@ -84,6 +95,12 @@ export class DropdownMenuDirective implements AfterViewInit, OnDestroy {
         });
     }
 
+    private _checkMenu() {
+        if (!this.menu) {
+            console.error('Invalid menu instance!');
+        }
+    }
+
     private _subscribeToPositions(position: FlexibleConnectedPositionStrategy): void {
         // if (this.menu.setPositionClasses) {
         //     position.positionChanges.subscribe(change => {
@@ -107,12 +124,14 @@ export class DropdownMenuDirective implements AfterViewInit, OnDestroy {
         return this._overlayRef;
     }
 
+    /** Returns a stream that emits whenever an action that should close the menu occurs. */
     private _menuClosingActions(): Observable<any> {
         if (this._overlayRef) {
             const backdrop = this._overlayRef.backdropClick();
             const detachments = this._overlayRef.detachments();
+            const parentClose = this._parentMenu ? this._parentMenu.closed : of();
 
-            return merge(backdrop, detachments);
+            return merge(backdrop, detachments, parentClose);
         }
     }
 

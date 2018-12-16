@@ -1,7 +1,6 @@
 import {
     Component, EventEmitter, InjectionToken, OnDestroy, OnInit, Output, TemplateRef,
-    ViewChild, ViewEncapsulation, ChangeDetectionStrategy, QueryList, ContentChildren, AfterContentInit, HostListener,
-    ElementRef, AfterViewInit
+    ViewChild, ViewEncapsulation, ChangeDetectionStrategy, QueryList, ContentChildren, AfterContentInit
 } from '@angular/core';
 import { DndMenuItemComponent } from '../dnd-menu-item/dnd-menu-item.component';
 
@@ -19,7 +18,7 @@ const DROPDOWN_MENU_PANEL = new InjectionToken<any>('DROPDOWN_MENU_PANEL');
         {provide: DROPDOWN_MENU_PANEL, useExisting: DropdownMenuComponent}
     ]
 })
-export class DropdownMenuComponent implements OnInit, OnDestroy, AfterViewInit, AfterContentInit {
+export class DropdownMenuComponent implements OnInit, OnDestroy, AfterContentInit {
 
 
     @Output() readonly closed: EventEmitter<void | 'click' | 'keydown' | 'tab'> =
@@ -29,25 +28,27 @@ export class DropdownMenuComponent implements OnInit, OnDestroy, AfterViewInit, 
 
     @ContentChildren(DndMenuItemComponent) items: QueryList<DndMenuItemComponent>;
 
-    @HostListener('click', ['$event'])
-    onClick($event) {
-        this.closed.emit('click');
-    }
-
-    constructor(private elRef: ElementRef) {
-    }
+    constructor() {}
 
     ngOnInit() {
+        console.log('Initialized');
     }
 
     ngOnDestroy() {
         this.closed.complete();
+        this.items.map((item: DndMenuItemComponent) => {
+            item.clicked.unsubscribe();
+        });
+        console.log('Destroyed');
     }
 
     ngAfterContentInit() {
-        this.items.changes.subscribe((changes) => {
-            console.log(changes);
+        console.log('Content initialized', this.closed);
+        this.items.map((item: DndMenuItemComponent) => {
+            item.clicked.subscribe(($event) => {
+                console.log('Closed in menu', $event);
+                this.closed.emit('click');
+            });
         });
-        console.log('Content Children', this.items);
     }
 }
